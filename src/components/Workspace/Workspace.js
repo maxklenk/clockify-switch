@@ -1,7 +1,7 @@
 import React from 'react';
 import './Workspace.css';
 import Project from "../Project/Project";
-import {getRunningEntry, startTask, stopTask} from "../Clockify";
+import {getRunningEntry, startTask, stopTask, editTaskDescription} from "../Clockify";
 
 class Workspace extends React.Component {
   constructor(props) {
@@ -14,6 +14,11 @@ class Workspace extends React.Component {
 
   componentDidMount() {
     this.updateRunningEntry();
+    this.interval = setInterval(() => this.updateRunningEntry(), 30*1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   updateRunningEntry() {
@@ -37,6 +42,13 @@ class Workspace extends React.Component {
     stopTask(this.state.runningEntry);
   }
 
+  updateTaskDescription(event) {
+    const runningEntry = this.state.runningEntry;
+    runningEntry.description = event.target.value;
+    this.setState({runningEntry: runningEntry});
+    editTaskDescription(runningEntry);
+  }
+
   renderProjects() {
     if (!this.props.workspace || !this.props.workspace.projects) {
       return '';
@@ -48,6 +60,7 @@ class Workspace extends React.Component {
         runningEntry={this.state.runningEntry}
         startTask={(project, task) => this.start(project, task)}
         stopTask={() => this.stop()}
+        updateTaskDescription={(event) => this.updateTaskDescription(event)}
       />
     });
   }

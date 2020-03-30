@@ -21,6 +21,10 @@ class App extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   onEnterApiKey(token) {
     setApiToken(token)
       .then(() => {
@@ -29,6 +33,7 @@ class App extends React.Component {
           apiToken: token,
         });
         this.loadWorkspaces();
+        this.interval = setInterval(() => this.loadWorkspaces(), 10*60*1000);
       })
       .catch(() => {});
   }
@@ -46,11 +51,13 @@ class App extends React.Component {
     window.location.reload();
   }
 
-  render() {
-    const spaces = this.state.workspaces.map((workspace) => {
+  renderSpaces() {
+    return this.state.workspaces.map((workspace) => {
       return <Workspace key={workspace.id} workspace={workspace} />
     });
+  }
 
+  render() {
     const logout = <button className="App-logout" onClick={this.logout}>Logout</button>;
 
     const input = (
@@ -62,7 +69,7 @@ class App extends React.Component {
         <header className="App-header">
           <h1>Clockify Switch</h1>
 
-          {this.state.apiToken ? [spaces, logout] : input}
+          {this.state.apiToken ? [this.renderSpaces(), logout] : input}
         </header>
       </div>
     );

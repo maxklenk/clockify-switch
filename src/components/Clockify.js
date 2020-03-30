@@ -83,6 +83,7 @@ export function stopTask(currentTask) {
   const timeEntry = {
     "billable": currentTask.billable,
     "projectId": currentTask.projectId,
+    "taskId": currentTask.taskId,
     "start": currentTask.timeInterval.start,
     "end": new Date().toISOString(),
   };
@@ -95,7 +96,25 @@ export function stopTask(currentTask) {
     },
     body: JSON.stringify(timeEntry),
   });
+}
 
+export function editTaskDescription(currentTask) {
+  const timeEntry = {
+    "billable": currentTask.billable,
+    "projectId": currentTask.projectId,
+    "taskId": currentTask.taskId,
+    "start": currentTask.timeInterval.start,
+    "description": currentTask.description,
+  };
+
+  // PUT /workspaces/{workspaceId}/time-entries/{id}
+  return apiRequest(`/workspaces/${currentTask.workspaceId}/time-entries/${currentTask.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(timeEntry),
+  });
 }
 
 export function apiRequest(url, options = {}) {
