@@ -1,0 +1,27 @@
+.Project {
+    opacity: 0.8;
+    padding: 10px 15px 15px 15px;
+    border-radius: 4px;
+    margin: 10px;
+    box-shadow: 2px 2px 4px black;
+    cursor: pointer;
+    width: 30%;
+    box-sizing: border-box;
+    min-width: 300px;
+}
+
+.Project.active {
+    opacity: 1;
+}
+
+.Project h4 {
+    margin: 0 8px 5px 0;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Project time {
+    font-family: monospace;
+}
