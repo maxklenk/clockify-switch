@@ -40,6 +40,12 @@ class Project extends React.Component {
             <time>{active && <Stopwatch start={this.props.runningEntry.timeInterval.start}/>}</time>
           </div>
           <div className="tasks">
+            <button
+              className={'Task'}
+              onClick={() => active ? this.props.stopTask() : this.props.startTask(this.props.project, {id:'start'})}
+            >
+              {this.props.runningEntry ? (active ? 'Stop' : 'Switch') : 'Start'}
+            </button>
             {this.renderTasks()}
           </div>
           { active && (

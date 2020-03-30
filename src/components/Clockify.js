@@ -32,12 +32,6 @@ export function getWorkspaces() {
             const promise = apiRequest(`/workspaces/${workspace.id}/projects/${project.id}/tasks`);
             return promise.then((tasks) => {
               project.tasks = tasks;
-              const startTask = {
-                id: 'start',
-                name: 'Start',
-                active: false,
-              };
-              project.tasks.unshift(startTask);
             });
           }));
         });

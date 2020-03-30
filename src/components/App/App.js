@@ -69,7 +69,9 @@ class App extends React.Component {
         <header className="App-header">
           <h1>Clockify Switch</h1>
 
-          {this.state.apiToken ? [this.renderSpaces(), logout] : input}
+          {this.state.apiToken && this.renderSpaces()}
+          {this.state.apiToken && logout}
+          {!this.state.apiToken && input}
         </header>
       </div>
     );
