@@ -15,3 +15,5 @@ jobs:
       - uses: actions/checkout@v1
       - uses: bahmutov/npm-install@HEAD
       - run: yarn test
+        env:
+          CI: true
