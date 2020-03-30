@@ -35,4 +35,5 @@
 .Project-description input {
     font-size: 14px;
     padding: 7px 14px;
+    box-shadow: inset 1px 1px 3px #00000070;
 }
