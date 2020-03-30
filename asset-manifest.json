@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/clockify-switch/static/css/main.5e9a582a.chunk.css",
+    "main.css": "/clockify-switch/static/css/main.15ddd2df.chunk.css",
     "main.js": "/clockify-switch/static/js/main.6c6c88f4.chunk.js",
     "main.js.map": "/clockify-switch/static/js/main.6c6c88f4.chunk.js.map",
     "runtime-main.js": "/clockify-switch/static/js/runtime-main.866f976f.js",
@@ -8,15 +8,15 @@
     "static/js/2.b82991f3.chunk.js": "/clockify-switch/static/js/2.b82991f3.chunk.js",
     "static/js/2.b82991f3.chunk.js.map": "/clockify-switch/static/js/2.b82991f3.chunk.js.map",
     "index.html": "/clockify-switch/index.html",
-    "precache-manifest.1d6968942eb62136e1054af0edc65b24.js": "/clockify-switch/precache-manifest.1d6968942eb62136e1054af0edc65b24.js",
+    "precache-manifest.d9721b93ca6ab61461e2f0309d94814b.js": "/clockify-switch/precache-manifest.d9721b93ca6ab61461e2f0309d94814b.js",
     "service-worker.js": "/clockify-switch/service-worker.js",
-    "static/css/main.5e9a582a.chunk.css.map": "/clockify-switch/static/css/main.5e9a582a.chunk.css.map",
+    "static/css/main.15ddd2df.chunk.css.map": "/clockify-switch/static/css/main.15ddd2df.chunk.css.map",
     "static/js/2.b82991f3.chunk.js.LICENSE.txt": "/clockify-switch/static/js/2.b82991f3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.866f976f.js",
     "static/js/2.b82991f3.chunk.js",
-    "static/css/main.5e9a582a.chunk.css",
+    "static/css/main.15ddd2df.chunk.css",
     "static/js/main.6c6c88f4.chunk.js"
   ]
 }
