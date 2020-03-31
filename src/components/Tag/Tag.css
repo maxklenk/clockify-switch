@@ -1,0 +1,52 @@
+.Tag {
+    font-size: 14px;
+    padding: 5px;
+    background: #ffffff75;
+    color: #282c34;
+    margin-left: 14px;
+    margin-right: 5px;
+    height: 28px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+.Tag::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    border-width: 14px;
+    border-style: solid;
+    border-color: transparent #ffffff75 transparent transparent;
+}
+.Tag::after {
+    content: " ";
+    position: absolute;
+    height: 4px;
+    width: 4px;
+    margin-top: -2px;
+    top: 50%;
+    left: -4px;
+    border-radius: 50%;
+    background-color: #282c34;
+}
+
+.Project-tags {
+    text-align: right;
+}
+
+.Tag:hover {
+    background: #ffffffbd;
+}
+.Tag:hover::before {
+    border-color: transparent #ffffffbd transparent transparent;
+}
+
+.Tag.active {
+    background: #ffffff;
+}
+.Tag.active::before {
+    border-color: transparent #ffffff transparent transparent;
+}

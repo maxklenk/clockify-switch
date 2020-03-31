@@ -1,6 +1,7 @@
 import React from 'react';
 import './Project.css';
 import Task from "../Task/Task";
+import Tag from "../Tag/Tag";
 import Stopwatch from "../Stopwatch/Stopwatch";
 
 class Project extends React.Component {
@@ -26,6 +27,24 @@ class Project extends React.Component {
     );
   }
 
+  renderTags() {
+    if (!this.props.workspace || !this.props.workspace.tags) {
+      return '';
+    }
+    const activeProject = this.props.runningEntry && this.props.runningEntry.projectId === this.props.project.id;
+    return this.props.workspace.tags.map((tag) => {
+      const active = activeProject && this.props.runningEntry && this.props.runningEntry.tagIds && this.props.runningEntry.tagIds.indexOf(tag.id) !== -1;
+      return (
+        <Tag
+          key={tag.id}
+          name={tag.name}
+          active={active}
+          onClick={(event) => {this.props.setTag(this.props.project, tag)}}
+        />
+      )
+    });
+  }
+
   render() {
     const active = this.props.runningEntry && this.props.runningEntry.projectId === this.props.project.id;
     return (
@@ -39,7 +58,7 @@ class Project extends React.Component {
             <h4>{this.props.project.name}</h4>
             <time>{active && <Stopwatch start={this.props.runningEntry.timeInterval.start}/>}</time>
           </div>
-          <div className="tasks">
+          <div className="Project-tasks">
             <button
               className={'Task'}
               onClick={() => active ? this.props.stopTask() : this.props.startTask(this.props.project, {id:'start'})}
@@ -60,6 +79,9 @@ class Project extends React.Component {
               />
             </div>
           )}
+          <div className="Project-tags">
+            {this.renderTags()}
+          </div>
         </div>
       </div>
     );

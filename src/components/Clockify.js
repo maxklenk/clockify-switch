@@ -21,21 +21,33 @@ export function getWorkspaces() {
     .then(data => {
       workspaces = data;
 
-      // get projects
       return Promise.all(data.map((workspace) => {
-        const promise = apiRequest(`/workspaces/${workspace.id}/projects?archived=false`);
-        return promise.then((projects) => {
-          workspace.projects = projects;
+        // get tags
+        const promise1 = apiRequest(`/workspaces/${workspace.id}/tags`)
+          .then((tags) => {
+            workspace.tags = tags;
+            return tags;
+          });
 
-          // get tasks
-          return Promise.all(projects.map((project) => {
-            const promise = apiRequest(`/workspaces/${workspace.id}/projects/${project.id}/tasks`);
-            return promise.then((tasks) => {
-              project.tasks = tasks;
-            });
-          }));
-        });
+        // get projects
+        const promise2 = apiRequest(`/workspaces/${workspace.id}/projects?archived=false`)
+          .then((projects) => {
+            workspace.projects = projects;
+
+            // get tasks
+            return Promise.all(projects.map((project) => {
+              const promise = apiRequest(`/workspaces/${workspace.id}/projects/${project.id}/tasks`);
+              return promise.then((tasks) => {
+                project.tasks = tasks;
+              });
+            }));
+          });
+
+        return Promise.all([promise1, promise2]);
       }));
+    })
+    .then(() => {
+
     })
     .then(() => {
       return workspaces;
@@ -55,10 +67,10 @@ export function getRunningEntry(workspaceId) {
   });
 }
 
-export function startTask(project, task = null) {
+export function startTask(project, task = null, tag = null) {
   const timeEntry = {
     //description: '',
-    tagIds: null,
+    tagIds: tag && [tag.id],
     billable: project.billable,
     taskId: task ? task.id : null,
     projectId: project.id,
