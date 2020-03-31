@@ -54,7 +54,8 @@ class Project extends React.Component {
                 type="text"
                 placeholder="Description"
                 value={this.props.runningEntry.description || ''}
-                onChange={this.props.updateTaskDescription}
+                onChange={(event) => this.props.typeTaskDescription(event)}
+                onBlur={(event) => this.props.updateTaskDescription(event)}
                 onClick={(event) => event.stopPropagation()}
               />
             </div>

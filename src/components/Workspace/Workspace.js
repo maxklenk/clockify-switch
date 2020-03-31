@@ -1,7 +1,7 @@
 import React from 'react';
 import './Workspace.css';
 import Project from "../Project/Project";
-import {getRunningEntry, startTask, stopTask, editTaskDescription} from "../Clockify";
+import {getRunningEntry, startTask, updateTask, stopTask} from "../Clockify";
 
 class Workspace extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class Workspace extends React.Component {
 
   start(project, task) {
     this.setState({runningEntry: null});
-    task = task.id === 'start' ? null : task;
+    task = (task && task.id === 'start') ? null : task;
     startTask(project, task)
       .then((runningEntry) => {
         this.setState({runningEntry: runningEntry});
@@ -42,11 +42,14 @@ class Workspace extends React.Component {
     stopTask(this.state.runningEntry);
   }
 
-  updateTaskDescription(event) {
+  typeTaskDescription(event) {
     const runningEntry = this.state.runningEntry;
     runningEntry.description = event.target.value;
     this.setState({runningEntry: runningEntry});
-    editTaskDescription(runningEntry);
+  }
+
+  updateTaskDescription(event) {
+    updateTask(this.state.runningEntry);
   }
 
   renderProjects() {
@@ -61,6 +64,7 @@ class Workspace extends React.Component {
         startTask={(project, task) => this.start(project, task)}
         stopTask={() => this.stop()}
         updateTaskDescription={(event) => this.updateTaskDescription(event)}
+        typeTaskDescription={(event) => this.typeTaskDescription(event)}
       />
     });
   }

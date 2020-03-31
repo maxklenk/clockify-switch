@@ -57,12 +57,13 @@ export function getRunningEntry(workspaceId) {
 
 export function startTask(project, task = null) {
   const timeEntry = {
-    "start": new Date().toISOString(),
-    //"billable": "true", // default
-    //"description": "Writing documentation",
-    "projectId": project.id,
-    "taskId": task ? task.id : null,
-    //"end": "2018-06-12T13:50:14.000Z",
+    //description: '',
+    tagIds: null,
+    billable: project.billable,
+    taskId: task ? task.id : null,
+    projectId: project.id,
+    start: new Date().toISOString(),
+    //end: '2018-06-12T13:50:14.000Z',
   };
   return apiRequest(`/workspaces/${project.workspaceId}/time-entries`, {
     method: 'POST',
@@ -75,11 +76,13 @@ export function startTask(project, task = null) {
 
 export function stopTask(currentTask) {
   const timeEntry = {
-    "billable": currentTask.billable,
-    "projectId": currentTask.projectId,
-    "taskId": currentTask.taskId,
-    "start": currentTask.timeInterval.start,
-    "end": new Date().toISOString(),
+    description: currentTask.description,
+    tagIds: currentTask.tagIds,
+    billable: currentTask.billable,
+    taskId: currentTask.taskId,
+    projectId: currentTask.projectId,
+    start: currentTask.timeInterval.start,
+    end: new Date().toISOString(),
   };
 
   // PUT /workspaces/{workspaceId}/time-entries/{id}
@@ -92,13 +95,15 @@ export function stopTask(currentTask) {
   });
 }
 
-export function editTaskDescription(currentTask) {
+export function updateTask(currentTask) {
   const timeEntry = {
-    "billable": currentTask.billable,
-    "projectId": currentTask.projectId,
-    "taskId": currentTask.taskId,
-    "start": currentTask.timeInterval.start,
-    "description": currentTask.description,
+    description: currentTask.description,
+    tagIds: currentTask.tagIds,
+    billable: currentTask.billable,
+    taskId: currentTask.taskId,
+    projectId: currentTask.projectId,
+    start: currentTask.timeInterval.start,
+    end: currentTask.timeInterval.end,
   };
 
   // PUT /workspaces/{workspaceId}/time-entries/{id}
