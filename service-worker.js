@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/clockify-switch/precache-manifest.ddc8e23acf58afd9e7810242bfd51135.js"
+  "/clockify-switch/precache-manifest.1cc14bca3e9e420b8d002db713018b29.js"
 );
 
 self.addEventListener('message', (event) => {
