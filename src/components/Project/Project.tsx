@@ -23,11 +23,11 @@ class Project extends React.Component<ProjectProps, ProjectState> {
         if (!this.props.project || !this.props.project.tasks) {
             return '';
         }
-        return this.props.project.tasks.map((task: any) => this.renderTask(task));
+        return this.props.project.tasks.map((task) => this.renderTask(task));
     }
 
     renderTask(task: ClockifyTask) {
-        const active = this.props.runningEntry
+        const active = !!this.props.runningEntry
             && this.props.project.id === this.props.runningEntry.projectId
             && (this.props.runningEntry.taskId === task.id || (this.props.runningEntry.taskId == null && task.id === 'start'));
         return (
@@ -44,9 +44,9 @@ class Project extends React.Component<ProjectProps, ProjectState> {
         if (!this.props.workspace || !this.props.workspace.tags) {
             return '';
         }
-        const activeProject = this.props.runningEntry && this.props.runningEntry.projectId === this.props.project.id;
+        const activeProject = !!this.props.runningEntry && this.props.runningEntry.projectId === this.props.project.id;
         return this.props.workspace.tags.map((tag: ClockifyTag) => {
-            const active = activeProject && this.props.runningEntry && this.props.runningEntry.tagIds && this.props.runningEntry.tagIds.indexOf(tag.id) !== -1;
+            const active = activeProject && !!this.props.runningEntry && this.props.runningEntry.tagIds && this.props.runningEntry.tagIds.indexOf(tag.id) !== -1;
             return (
                 <Tag
                     key={tag.id}
@@ -61,17 +61,17 @@ class Project extends React.Component<ProjectProps, ProjectState> {
     }
 
     render() {
-        const active = this.props.runningEntry && this.props.runningEntry.projectId === this.props.project.id;
+        const active = !!this.props.runningEntry && this.props.runningEntry.projectId === this.props.project.id;
         return (
             <div className={'Project'}>
                 <div
                     className={'Project-body ' + (active ? 'active' : '')}
                     style={{'backgroundColor': this.props.project.color}}
-                    onClick={() => active ? this.props.stopTask() : this.props.startTask(this.props.project, this.props.project.tasks[0])}
+                    onClick={() => active ? this.props.stopTask() : this.props.startTask(this.props.project, null)}
                 >
                     <div style={{'display': 'flex'}}>
                         <h4>{this.props.project.name}</h4>
-                        <time>{active && <Stopwatch start={this.props.runningEntry.timeInterval.start}/>}</time>
+                        <time>{active && this.props.runningEntry && <Stopwatch start={this.props.runningEntry.timeInterval.start}/>}</time>
                     </div>
                     <div className="Project-tasks">
                         <button
@@ -87,7 +87,7 @@ class Project extends React.Component<ProjectProps, ProjectState> {
                             <input
                                 type="text"
                                 placeholder="Description"
-                                value={this.props.runningEntry.description || ''}
+                                value={(this.props.runningEntry && this.props.runningEntry.description) || ''}
                                 onChange={(event) => this.props.typeTaskDescription(event)}
                                 onBlur={(event) => this.props.updateTaskDescription(event)}
                                 onClick={(event) => event.stopPropagation()}

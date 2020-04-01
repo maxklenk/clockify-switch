@@ -7,7 +7,7 @@ type WorkspaceProps = {
     workspace: ClockifyWorkspace;
 }
 type WorkspaceState = {
-    runningEntry: ClockifyTimeEntry;
+    runningEntry: ClockifyTimeEntry | null;
 }
 
 class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
@@ -34,7 +34,7 @@ class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
             });
     }
 
-    start(project:ClockifyProject, task:ClockifyTask|null = null, tag:ClockifyTag|null = null) {
+    start(project: ClockifyProject, task: ClockifyTask | null = null, tag: ClockifyTag | null = null) {
         this.setState({runningEntry: null});
         task = (task && task.id === 'start') ? null : task;
         startTask(project, task, tag)
@@ -44,21 +44,27 @@ class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
     }
 
     stop() {
+        if (this.state.runningEntry) {
+            stopTask(this.state.runningEntry);
+        }
         this.setState({runningEntry: null});
-        stopTask(this.state.runningEntry);
     }
 
-    typeTaskDescription(event:React.ChangeEvent<HTMLInputElement>) {
-        const runningEntry = this.state.runningEntry;
-        runningEntry.description = event.target.value;
-        this.setState({runningEntry: runningEntry});
+    typeTaskDescription(event: React.ChangeEvent<HTMLInputElement>) {
+        if (this.state.runningEntry) {
+            const runningEntry = this.state.runningEntry;
+            runningEntry.description = event.target.value;
+            this.setState({runningEntry: runningEntry});
+        }
     }
 
     updateTaskDescription() {
-        updateTask(this.state.runningEntry);
+        if (this.state.runningEntry) {
+            updateTask(this.state.runningEntry);
+        }
     }
 
-    setTag(project:any, tag:any) {
+    setTag(project: ClockifyProject, tag: ClockifyTag) {
         if (this.state.runningEntry && this.state.runningEntry.projectId === project.id) {
             // running task in same project
             const runningEntry = this.state.runningEntry;
@@ -84,17 +90,17 @@ class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
         if (!this.props.workspace || !this.props.workspace.projects) {
             return '';
         }
-        return this.props.workspace.projects.map((project:ClockifyProject) => {
+        return this.props.workspace.projects.map((project: ClockifyProject) => {
             return <Project
                 key={project.id}
                 workspace={this.props.workspace}
                 project={project}
                 runningEntry={this.state.runningEntry}
-                startTask={(project:ClockifyProject, task:ClockifyTask) => this.start(project, task)}
+                startTask={(project: ClockifyProject, task: ClockifyTask) => this.start(project, task)}
                 stopTask={() => this.stop()}
                 updateTaskDescription={() => this.updateTaskDescription()}
-                typeTaskDescription={(event:React.ChangeEvent<HTMLInputElement>) => this.typeTaskDescription(event)}
-                setTag={(project:ClockifyProject, tag:ClockifyTag) => this.setTag(project, tag)}
+                typeTaskDescription={(event: React.ChangeEvent<HTMLInputElement>) => this.typeTaskDescription(event)}
+                setTag={(project: ClockifyProject, tag: ClockifyTag) => this.setTag(project, tag)}
             />
         });
     }

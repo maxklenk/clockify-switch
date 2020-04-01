@@ -1,9 +1,52 @@
-export type ClockifyTag = any;
-export type ClockifyTask = any;
-export type ClockifyProject = any;
-export type ClockifyWorkspace = any;
-export type ClockifyTimeEntry = any;
-export type ClockifyUser = any;
+export type ClockifyTag = {
+    id: string;
+    name: string;
+    workspaceId: string;
+};
+export type ClockifyTask = {
+    assigneeIds: [string];
+    estimate: string;
+    id: string;
+    name: string;
+    projectId: string;
+    status: 'ACTIVE'|'DONE';
+};
+export type ClockifyProject = {
+    id: string;
+    workspaceId: string;
+    name: string;
+    color: string;
+    billable: boolean;
+    tasks?: Array<ClockifyTask>;
+    // many other (unused) properties
+};
+export type ClockifyWorkspace = {
+    id: string;
+    name: string;
+    projects: Array<ClockifyProject>;
+    tags: Array<ClockifyTag>;
+    // many other (unused) properties
+};
+export type ClockifyTimeEntry = {
+    billable: boolean;
+    description: string;
+    id: string;
+    isLocked: boolean;
+    projectId: string;
+    tagIds: Array<string>;
+    taskId: string;
+    timeInterval: {
+        duration: string;
+        end: string;
+        start: string;
+    };
+    userId: string;
+    workspaceId: string;
+};
+export type ClockifyUser = {
+    id: string;
+    // many other (unused) properties
+};
 
 let apiToken: string | null;
 
@@ -23,9 +66,9 @@ export function getWorkspaces() {
     if (!apiToken) {
         return Promise.resolve([]);
     }
-    let workspaces: ClockifyWorkspace;
+    let workspaces: Array<ClockifyWorkspace>;
     return apiRequest('/workspaces')
-        .then(data => {
+        .then((data) => {
             workspaces = data;
 
             return Promise.all(data.map((workspace: ClockifyWorkspace) => {

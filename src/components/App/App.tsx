@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import Workspace from "../Workspace/Workspace";
 import EnterApiKey from "../EnterApiKey/EnterApiKey";
-import {getWorkspaces, setApiToken} from "../../services/Clockify";
+import {ClockifyWorkspace, getWorkspaces, setApiToken} from "../../services/Clockify";
 
 type AppProps = {}
 type AppState = {
-    workspaces: any;
+    workspaces: Array<ClockifyWorkspace>;
     apiToken: string | null;
 }
 
@@ -57,7 +57,7 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     renderSpaces() {
-        return this.state.workspaces.map((workspace: any) => {
+        return this.state.workspaces.map((workspace: ClockifyWorkspace) => {
             return <Workspace key={workspace.id} workspace={workspace}/>
         });
     }
