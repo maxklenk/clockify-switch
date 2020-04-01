@@ -1,7 +1,7 @@
 import React from 'react';
 import './Workspace.css';
 import Project from "../Project/Project";
-import {ClockifyProject, ClockifyTag, ClockifyTask, ClockifyTimeEntry, ClockifyWorkspace, getRunningEntry, startTask, stopTask, updateTask} from "../Clockify";
+import {ClockifyProject, ClockifyTag, ClockifyTask, ClockifyTimeEntry, ClockifyWorkspace, getRunningEntry, startTask, stopTask, updateTask} from "../../services/Clockify";
 
 type WorkspaceProps = {
     workspace: ClockifyWorkspace;

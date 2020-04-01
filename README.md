@@ -31,3 +31,26 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+
+## The Code
+
+### Typescript
+
+The project is written in Typescript, this [cheatsheet](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#reacttypescript-cheatsheets) helps to implement best practice. 
+
+### Structure
+
+```
+/src
+  /components
+    /ComponentA
+      ComponentA.css
+      ComponentA.tsx
+      ComponentA.test.tsx
+  / services
+    ServiceA.tsx
+  index.css (global styles)
+  index.tsx
+```
+

@@ -3,7 +3,7 @@ import './Project.css';
 import Task from "../Task/Task";
 import Tag from "../Tag/Tag";
 import Stopwatch from "../Stopwatch/Stopwatch";
-import {ClockifyProject, ClockifyTag, ClockifyTask, ClockifyTimeEntry, ClockifyWorkspace} from "../Clockify";
+import {ClockifyProject, ClockifyTag, ClockifyTask, ClockifyTimeEntry, ClockifyWorkspace} from "../../services/Clockify";
 
 type ProjectProps = {
     workspace: ClockifyWorkspace;

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Workspace from "../Workspace/Workspace";
 import EnterApiKey from "../EnterApiKey/EnterApiKey";
-import {getWorkspaces, setApiToken} from "../Clockify";
+import {getWorkspaces, setApiToken} from "../../services/Clockify";
 
 type AppProps = {}
 type AppState = {
