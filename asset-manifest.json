@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/clockify-switch/static/css/main.daac56d7.chunk.css",
-    "main.js": "/clockify-switch/static/js/main.101a794a.chunk.js",
-    "main.js.map": "/clockify-switch/static/js/main.101a794a.chunk.js.map",
+    "main.js": "/clockify-switch/static/js/main.c9fd32ff.chunk.js",
+    "main.js.map": "/clockify-switch/static/js/main.c9fd32ff.chunk.js.map",
     "runtime-main.js": "/clockify-switch/static/js/runtime-main.866f976f.js",
     "runtime-main.js.map": "/clockify-switch/static/js/runtime-main.866f976f.js.map",
-    "static/js/2.b82991f3.chunk.js": "/clockify-switch/static/js/2.b82991f3.chunk.js",
-    "static/js/2.b82991f3.chunk.js.map": "/clockify-switch/static/js/2.b82991f3.chunk.js.map",
+    "static/js/2.59ceec89.chunk.js": "/clockify-switch/static/js/2.59ceec89.chunk.js",
+    "static/js/2.59ceec89.chunk.js.map": "/clockify-switch/static/js/2.59ceec89.chunk.js.map",
     "index.html": "/clockify-switch/index.html",
-    "precache-manifest.1cc14bca3e9e420b8d002db713018b29.js": "/clockify-switch/precache-manifest.1cc14bca3e9e420b8d002db713018b29.js",
+    "precache-manifest.a11befdbcefa93d881ce9fb6b8ad9acd.js": "/clockify-switch/precache-manifest.a11befdbcefa93d881ce9fb6b8ad9acd.js",
     "service-worker.js": "/clockify-switch/service-worker.js",
     "static/css/main.daac56d7.chunk.css.map": "/clockify-switch/static/css/main.daac56d7.chunk.css.map",
-    "static/js/2.b82991f3.chunk.js.LICENSE.txt": "/clockify-switch/static/js/2.b82991f3.chunk.js.LICENSE.txt"
+    "static/js/2.59ceec89.chunk.js.LICENSE.txt": "/clockify-switch/static/js/2.59ceec89.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.866f976f.js",
-    "static/js/2.b82991f3.chunk.js",
+    "static/js/2.59ceec89.chunk.js",
     "static/css/main.daac56d7.chunk.css",
-    "static/js/main.101a794a.chunk.js"
+    "static/js/main.c9fd32ff.chunk.js"
   ]
 }
