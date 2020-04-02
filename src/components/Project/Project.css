@@ -12,6 +12,9 @@
     border-radius: 4px;
     height: 100%;
     box-shadow: 2px 2px 4px black;
+}
+
+.Project-body.inactive {
     cursor: pointer;
 }
 
@@ -43,3 +46,9 @@
 .Project-tasks {
     flex-grow: 1;
 }
+
+.Project-body.inactive:hover .Task:first-child {
+    background-color: white;
+    color: black;
+}
+

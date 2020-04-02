@@ -65,9 +65,9 @@ class Project extends React.Component<ProjectProps, ProjectState> {
         return (
             <div className={'Project'}>
                 <div
-                    className={'Project-body ' + (active ? 'active' : '')}
+                    className={'Project-body ' + (active ? 'active' : 'inactive')}
                     style={{'backgroundColor': this.props.project.color}}
-                    onClick={() => active ? this.props.stopTask() : this.props.startTask(this.props.project, null)}
+                    onClick={() => active ? () => {} : this.props.startTask(this.props.project, null)}
                 >
                     <div style={{'display': 'flex'}}>
                         <h4>{this.props.project.name}</h4>
