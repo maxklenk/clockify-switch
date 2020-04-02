@@ -86,6 +86,22 @@ class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
         }
     }
 
+    addMinutes(minutes:number) {
+        if (this.state.runningEntry) {
+            // calculate new start
+            const startTime = +new Date(this.state.runningEntry.timeInterval.start);
+            const newStartTime = startTime - minutes * 60 * 1000;
+
+            // update state
+            const runningEntry = this.state.runningEntry;
+            runningEntry.timeInterval.start = new Date(newStartTime).toISOString();
+            this.setState({runningEntry: runningEntry});
+
+            // save on Clockify
+            updateTask(runningEntry);
+        }
+    }
+
     renderProjects() {
         if (!this.props.workspace || !this.props.workspace.projects) {
             return '';
@@ -101,11 +117,11 @@ class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
                 updateTaskDescription={() => this.updateTaskDescription()}
                 typeTaskDescription={(event: React.ChangeEvent<HTMLInputElement>) => this.typeTaskDescription(event)}
                 setTag={(project: ClockifyProject, tag: ClockifyTag) => this.setTag(project, tag)}
+                addFifteenMinutes={() => this.addMinutes(15)}
             />
         });
     }
 
-    // Workspace: {this.props.workspace.name}
     render() {
         return (
             <div className="Workspace">

@@ -23,7 +23,7 @@ class Stopwatch extends React.Component<StopwatchProps, StopwatchState> {
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.updateTimer(), 1000);
+        this.interval = setInterval(() => this.updateTimer(), 250);
     }
 
     componentWillUnmount() {

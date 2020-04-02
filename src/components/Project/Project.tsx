@@ -14,6 +14,7 @@ type ProjectProps = {
     typeTaskDescription: Function;
     updateTaskDescription: Function;
     setTag: Function;
+    addFifteenMinutes: Function;
 }
 type ProjectState = {}
 
@@ -71,7 +72,8 @@ class Project extends React.Component<ProjectProps, ProjectState> {
                 >
                     <div style={{'display': 'flex'}}>
                         <h4>{this.props.project.name}</h4>
-                        <time>{active && this.props.runningEntry && <Stopwatch start={this.props.runningEntry.timeInterval.start}/>}</time>
+                        {active && <button className="Project-addMinutes" title="Start entry 15 minutes earlier." onClick={() => this.props.addFifteenMinutes()}>+15</button>}
+                        {active && this.props.runningEntry && <time><Stopwatch start={this.props.runningEntry.timeInterval.start}/></time>}
                     </div>
                     <div className="Project-tasks">
                         <button
