@@ -11,26 +11,35 @@ type WorkspaceState = {
 }
 
 class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
-    interval: NodeJS.Timeout | undefined;
+    timeout: NodeJS.Timeout | undefined;
     state: WorkspaceState = {
         runningEntry: null
     };
 
     componentDidMount() {
         this.updateRunningEntry();
-        this.interval = setInterval(() => this.updateRunningEntry(), 30 * 1000);
     }
 
     componentWillUnmount() {
-        if (this.interval) {
-            clearInterval(this.interval);
+        clearTimeout();
+    }
+
+    clearTimeout() {
+        if (this.timeout) {
+            clearInterval(this.timeout);
         }
     }
 
     updateRunningEntry() {
-        getRunningEntry(this.props.workspace.id)
+        clearTimeout();
+        return getRunningEntry(this.props.workspace.id)
             .then((runningEntry) => {
                 this.setState({runningEntry: runningEntry});
+            })
+            .finally(() => {
+                this.timeout = setTimeout(() => {
+                    this.updateRunningEntry();
+                }, 30 * 1000);
             });
     }
 
@@ -51,6 +60,7 @@ class Workspace extends React.Component<WorkspaceProps, WorkspaceState> {
     }
 
     typeTaskDescription(event: React.ChangeEvent<HTMLInputElement>) {
+        clearTimeout();
         if (this.state.runningEntry) {
             const runningEntry = this.state.runningEntry;
             runningEntry.description = event.target.value;
