@@ -66,6 +66,7 @@
     color: #282c34;
     cursor: pointer;
     border: none;
+    flex-shrink: 0;
 }
 
 .Project-addMinutes:hover {
